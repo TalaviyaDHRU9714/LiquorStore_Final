@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="invoice-box">
+    <div class="no-print invoice-top">
+        <h1 class="text-success invoice-top-title">✓ Payment Successful!</h1>
+        <p class="text-muted invoice-top-subtitle">Your order has been placed securely.</p>
+    </div>
+
+    <div class="invoice-body">
+        <h2 class="invoice-text page-title invoice-title">
+            Official Invoice</h2>
+
+        <div class="invoice-meta">
+            <div>
+                <p class="invoice-text text-muted invoice-line"><strong class="text-strong">Order
+                        ID:</strong> ORD-00{{ order.id }}</p>
+                <p class="invoice-text text-muted invoice-line"><strong class="text-strong">Date:</strong>
+                    {{ order.date_ordered.strftime('%Y-%m-%d %H:%M') }}</p>
+                <p class="invoice-text text-muted invoice-line"><strong class="text-strong">Customer:</strong>
+                    {{ current_user.name }}</p>
+            </div>
+            <div class="invoice-meta-right">
+                <p class="invoice-text text-muted invoice-line"><strong class="text-strong">Method:</strong>
+                    {{ order.payment_method }}</p>
+                <p class="invoice-text text-success invoice-line"><strong>Status:</strong> Paid &amp;
+                    Verified</p>
+            </div>
+        </div>
+
+        <table class="table-premium invoice-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th class="ta-center">Qty</th>
+                    <th class="ta-right">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items %}
+                <tr>
+                    <td class="invoice-text">{{ item.product.name }}</td>
+                    <td class="invoice-text ta-center">{{ item.quantity }}</td>
+                    <td class="invoice-text ta-right">₹{{ item.price_at_purchase * item.quantity }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="invoice-total">
+            <span class="invoice-text text-strong">Grand Total: </span>
+            <span class="invoice-text text-gold">₹{{ order.total_amount }}</span>
+        </div>
+    </div>
+
+    <p class="invoice-text text-muted invoice-note">
+        Valid Gujarat Liquor Permit verified successfully via OCR. Items will be dispatched to your registered address.
+    </p>
+
+    <div class="no-print invoice-actions">
+        <button type="button" class="btn btn-ghost" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <a href="{{ url_for('shop') }}" class="btn btn-primary btn-inline">Return to
+            Shop</a>
+    </div>
+</div>
+{% endblock %}

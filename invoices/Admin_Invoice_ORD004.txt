@@ -1,0 +1,13 @@
+====================================
+       OFFICIAL GUJARAT PERMIT ORDER 
+====================================
+Order ID: ORD-004
+Customer: Talaviya Dhru
+Payment Method: Cash on Delivery
+Status: Verified & Approved
+------------------------------------
+1x Kingfisher Ultra - ₹180.0
+1x Kingfisher Premium - ₹150.0
+------------------------------------
+GRAND TOTAL: ₹330.0
+====================================

@@ -1,0 +1,13 @@
+====================================
+       OFFICIAL GUJARAT PERMIT ORDER 
+====================================
+Order ID: ORD-001
+Customer: Talaviya Dhru
+Payment Method: Credit/Debit Card
+Status: Verified & Approved
+------------------------------------
+1x Kingfisher Strong - ₹140.0
+1x Bira 91 White - ₹170.0
+------------------------------------
+GRAND TOTAL: ₹310.0
+====================================

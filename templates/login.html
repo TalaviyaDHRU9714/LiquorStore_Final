@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card page-card--tight">
+    <h2 class="page-title">Member Login</h2>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input id="login-email" class="input-field" type="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input id="login-password" class="input-field" type="password" name="password" required
+                autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enter Store</button>
+    </form>
+
+    <p class="text-muted auth-switch-text">
+        New here? <a href="/signup" class="link-gold">Create an account</a>
+    </p>
+</div>
+{% endblock %}

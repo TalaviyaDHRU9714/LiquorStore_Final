@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card">
+    <h2 class="page-title page-divider">Gujarat State Verification</h2>
+
+    <p class="text-muted verify-intro">
+        As per the Gujarat Prohibition Act, you must provide proof of age, a valid government-issued liquor permit, and
+        residential address proof to enter this store.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-zone">
+            <label for="aadhaar_image">1. Aadhaar Card (Age Proof 21+)</label>
+            <input id="aadhaar_image" type="file" name="aadhaar_image" accept="image/*" required>
+        </div>
+
+        <div class="upload-zone">
+            <label for="permit_image">2. Gujarat Liquor Permit</label>
+            <p class="text-muted upload-help-text">Upload your official Health, Tourist,
+                or
+                Visitor Permit.</p>
+            <input id="permit_image" type="file" name="permit_image" accept="image/*" required>
+        </div>
+
+        <div class="upload-zone upload-zone-wide">
+            <label for="bill_image">3. Electricity Bill (Address Proof)</label>
+            <p class="text-muted upload-help-text">Upload a recent bill (Torrent Power,
+                PGVCL, UGVCL, etc.).</p>
+            <input id="bill_image" type="file" name="bill_image" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-primary-lg">Run AI Verification</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+====================================
+       OFFICIAL GUJARAT PERMIT ORDER 
+====================================
+Order ID: ORD-003
+Customer: Talaviya Dhru
+Payment Method: Credit/Debit Card
+Status: Verified & Approved
+------------------------------------
+1x Bira 91 White - ₹170.0
+------------------------------------
+GRAND TOTAL: ₹170.0
+====================================

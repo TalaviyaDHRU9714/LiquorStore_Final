@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card">
+    <h2 class="page-title page-divider">Secure Checkout</h2>
+
+    <h3 class="checkout-total">Total to Pay: <span class="text-gold checkout-total-amount">₹{{ total_price }}</span>
+    </h3>
+
+    <p class="text-muted checkout-address">
+        Delivery Address: <strong class="text-strong">Verified Gujarat Residence (via Electricity Bill)</strong>
+    </p>
+
+    <form method="POST" id="checkout-form" autocomplete="off" data-otp-sent="{{ 'true' if otp_sent else 'false' }}">
+        <h4 class="text-gold checkout-subtitle">Select Payment Method</h4>
+
+        <div class="payment-option">
+            <input type="radio" id="cod" name="payment_method" value="Cash on Delivery" {% if selected_payment
+                !='Credit/Debit Card' %}checked{% endif %} onclick="toggleCardForm(false)">
+            <label for="cod" class="payment-label">
+                Cash on
+                Delivery (COD)</label>
+        </div>
+
+        <div class="payment-option">
+            <input type="radio" id="card" name="payment_method" value="Credit/Debit Card" {% if
+                selected_payment=='Credit/Debit Card' %}checked{% endif %} onclick="toggleCardForm(true)">
+            <label for="card" class="payment-label">
+                Credit /
+                Debit Card</label>
+        </div>
+
+        <div id="card-form" class="card-form-panel">
+            <label class="text-muted field-label-sm">Card
+                Number</label>
+            <input type="text" name="card_number" id="card_number" class="input-field mb-1"
+                placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="23" autocomplete="off"
+                value="{{ form_data.get('card_number', '') }}">
+
+            <div class="checkout-row">
+                <div class="checkout-col">
+                    <label class="text-muted field-label-sm">Expiry
+                        Date</label>
+                    <input type="text" name="expiry" id="expiry" class="input-field" placeholder="MM/YY" maxlength="5"
+                        autocomplete="off" value="{{ form_data.get('expiry', '') }}">
+                </div>
+                <div class="checkout-col">
+                    <label class="text-muted field-label-sm">CVV</label>
+                    <input type="password" name="cvv" id="cvv" class="input-field" placeholder="123" maxlength="4"
+                        autocomplete="new-password" value="{{ form_data.get('cvv', '') }}">
+                </div>
+            </div>
+
+            <label class="text-muted field-label-sm mt-label">Registered
+                Mobile Number (linked with card)</label>
+            <input type="text" name="card_phone" id="card_phone" class="input-field"
+                placeholder="10-digit mobile number" maxlength="10" autocomplete="off"
+                value="{{ form_data.get('card_phone', '') }}">
+
+            {% if otp_sent %}
+            <p class="text-muted upload-help-text mt-sm">OTP sent to registered number:
+                <strong class="text-strong">{{ masked_phone }}</strong>
+            </p>
+            <label class="text-muted field-label-sm otp-label">Enter OTP</label>
+            <input type="text" name="otp" id="otp" class="input-field" placeholder="6-digit OTP" maxlength="6"
+                value="{{ form_data.get('otp', '') }}">
+            {% endif %}
+
+            <p class="text-muted payment-note">*This is a secure academic mock
+                payment
+                gateway.</p>
+        </div>
+
+        <input type="hidden" name="action" id="form-action" value="confirm_order">
+        <button type="button" id="send-otp-btn" class="btn btn-secondary btn-md hidden"
+            onclick="setActionAndSubmit('send_otp')">Send OTP</button>
+        <button type="button" id="card-pay-btn" class="btn btn-primary btn-primary-lg hidden"
+            onclick="setActionAndSubmit('confirm_card_payment')">Verify OTP & Pay</button>
+        <button type="button" id="cod-btn" class="btn btn-primary btn-primary-lg"
+            onclick="setActionAndSubmit('confirm_order')">Confirm Order</button>
+    </form>
+</div>
+
+<script>
+    const isOtpSent = document.getElementById('checkout-form').dataset.otpSent === 'true';
+
+    function toggleCardForm(show) {
+        document.getElementById('card-form').style.display = show ? 'block' : 'none';
+        document.getElementById('cod-btn').style.display = show ? 'none' : 'inline-block';
+        document.getElementById('send-otp-btn').style.display = show ? 'inline-block' : 'none';
+        document.getElementById('card-pay-btn').style.display = show && isOtpSent ? 'inline-block' : 'none';
+    }
+
+    function setActionAndSubmit(actionName) {
+        document.getElementById('form-action').value = actionName;
+        document.getElementById('checkout-form').submit();
+    }
+
+    window.onload = function () {
+        const cardSelected = document.getElementById('card').checked;
+        toggleCardForm(cardSelected);
+        if (isOtpSent) {
+            document.getElementById('card').checked = true;
+            toggleCardForm(true);
+        }
+    }
+</script>
+{% endblock %}

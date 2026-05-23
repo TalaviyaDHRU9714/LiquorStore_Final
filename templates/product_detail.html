@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="product-page">
+    <div class="product-layout">
+        <div class="product-photo">
+            <img src="{{ url_for('static', filename='images/' + product.category.lower() + '/' + product.image_file) }}"
+                alt="{{ product.name }}">
+        </div>
+
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <span class="category-pill">{{ product.category }}</span>
+
+            <ul class="detail-list">
+                <li>
+                    <span class="detail-key">Price</span>
+                    <span class="detail-value">₹{{ product.price }}</span>
+                </li>
+                <li>
+                    <span class="detail-key">Available Quantity</span>
+                    <span class="detail-value">{{ product.quantity }}</span>
+                </li>
+                <li>
+                    <span class="detail-key">Liquor Percentage (ABV)</span>
+                    <span class="detail-value">{{ product.alcohol_percentage }}%</span>
+                </li>
+            </ul>
+
+            <div class="action-row">
+                <a class="btn-gold" href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+                <a class="btn-outline" href="{{ url_for('shop') }}">Back to Shop</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

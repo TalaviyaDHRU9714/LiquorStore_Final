@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card page-card--xl page-card--tight admin-card-top">
+    <h2 class="page-title page-title--left page-divider">Admin Console: Order &amp; Revenue Management</h2>
+
+    <div class="admin-actions">
+        <a href="{{ url_for('admin_add_product') }}" class="btn btn-outline btn-inline-sm">
+            + Add New Product
+        </a>
+    </div>
+
+    <div class="stat-cards">
+        <div class="stat-card stat-card--green">
+            <h3>Total Revenue</h3>
+            <p class="text-success">₹{{ revenue }}</p>
+        </div>
+        <div class="stat-card stat-card--gold">
+            <h3>Total Orders</h3>
+            <p class="text-gold">{{ total_orders }}</p>
+        </div>
+    </div>
+
+    <h3 class="transactions-title">Recent Transactions</h3>
+    <div class="table-scroll">
+        <table class="table-admin">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Items</th>
+                    <th>Status / Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td class="order-meta-cell">
+                        ORD-00{{ order.id }}<br>
+                        <span class="text-muted order-meta-date">{{
+                            order.date_ordered.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </td>
+                    <td class="customer-cell">{{ order.buyer.name }}</td>
+                    <td class="text-success amount-strong">₹{{ order.total_amount }}</td>
+                    <td>{{ order.payment_method }}</td>
+                    <td class="items-cell">
+                        <ul class="items-list">
+                            {% for item in order.items %}
+                            <li>{{ item.quantity }}× {{ item.product.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('update_order_status', order_id=order.id) }}" method="POST"
+                            class="status-form">
+                            <select name="status" class="input-field status-select">
+                                <option value="Processing" {% if order.status=='Processing' %}selected{% endif %}>
+                                    Processing</option>
+                                <option value="Dispatched" {% if order.status=='Dispatched' %}selected{% endif %}>
+                                    Dispatched</option>
+                                <option value="Delivered" {% if order.status=='Delivered' %}selected{% endif %}>
+                                    Delivered</option>
+                                <option value="Cancelled" {% if order.status=='Cancelled' %}selected{% endif %}>
+                                    Cancelled</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-update">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-muted empty-row">No orders have been
+                        placed yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

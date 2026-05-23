@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card">
+    <div class="admin-header">
+        <h2 class="page-title title-inline">Add New Product</h2>
+        <a href="{{ url_for('admin_orders') }}" class="link-gold small-link">← Back to Dashboard</a>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input id="product-name" class="input-field" type="text" name="name" required
+                placeholder="e.g., Amrut Fusion Single Malt">
+        </div>
+
+        <div class="form-group">
+            <label for="product-price">Price (₹)</label>
+            <input id="product-price" class="input-field" type="number" name="price" step="0.01" required
+                placeholder="e.g., 4500">
+        </div>
+
+        <div class="form-group">
+            <label for="product-quantity">Available Quantity</label>
+            <input id="product-quantity" class="input-field" type="number" name="quantity" min="0" required
+                placeholder="e.g., 40">
+        </div>
+
+        <div class="form-group">
+            <label for="product-alcohol">Liquor Percentage (ABV %)</label>
+            <input id="product-alcohol" class="input-field" type="number" name="alcohol_percentage" min="0" max="100"
+                step="0.1" required placeholder="e.g., 42.8">
+        </div>
+
+        <div class="form-group">
+            <label for="product-category">Category</label>
+            <select id="product-category" class="input-field" name="category" required>
+                <option value="Beer">Beer</option>
+                <option value="Rum">Rum</option>
+                <option value="Tequila">Tequila</option>
+                <option value="Vodka">Vodka</option>
+                <option value="Gin">Gin</option>
+                <option value="Cognac">Cognac</option>
+                <option value="Wine">Wine</option>
+            </select>
+            <p class="text-muted category-note">This automatically sorts the image into
+                the
+                correct folder.</p>
+        </div>
+
+        <div class="upload-zone upload-zone-wide">
+            <label for="product-image">Upload Bottle Image</label>
+            <input id="product-image" type="file" name="image_file" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-primary-lg">Publish to Catalog</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Liquor Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('shop') }}" class="brand">Exquisite Spirits</a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('shop') }}">Shop</a>
+
+            {% if current_user.is_authenticated %}
+            <span class="user-name">Hello, {{ current_user.name }}</span>
+
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('admin_orders') }}" class="nav-dashboard">Dashboard</a>
+            {% endif %}
+
+            <a href="{{ url_for('cart') }}">Cart</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('signup') }}">Signup</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+
+</html>

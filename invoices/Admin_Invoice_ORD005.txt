@@ -1,0 +1,13 @@
+====================================
+       OFFICIAL GUJARAT PERMIT ORDER 
+====================================
+Order ID: ORD-005
+Customer: Talaviya Dhru
+Payment Method: Cash on Delivery
+Status: Verified & Approved
+------------------------------------
+1x Sula Chenin Blanc - ₹850.0
+1x Kingfisher Strong - ₹140.0
+------------------------------------
+GRAND TOTAL: ₹990.0
+====================================

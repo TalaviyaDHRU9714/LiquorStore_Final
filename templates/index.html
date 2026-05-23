@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-landing">
+    <h1>Exquisite Spirits, AI-Verified.</h1>
+    <p class="lead">
+        Welcome to the next generation of premium liquor retail. Our advanced AI scanning technology ensures
+        a safe and legal shopping experience for our exclusive clientele.
+    </p>
+
+    <div class="hero-actions">
+        {% if not current_user.is_authenticated %}
+        <a href="/signup" class="btn-hero-primary">Get Started</a>
+        <a href="/login" class="btn-hero-outline">Member Login</a>
+        {% else %}
+        <a href="/shop" class="btn-hero-primary">Enter the Shop</a>
+        {% endif %}
+    </div>
+
+    <div class="feature-grid">
+        <div>
+            <h3>AI Verification</h3>
+            <p>Instant Aadhaar-based age check using Tesseract OCR technology.</p>
+        </div>
+        <div>
+            <h3>Premium Collection</h3>
+            <p>Curated selection of the world's finest whiskeys, wines, and spirits.</p>
+        </div>
+        <div>
+            <h3>Secure Checkout</h3>
+            <p>Fully encrypted user data and secure session management for your privacy.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card page-card--tight">
+    <h2 class="page-title">Create Account</h2>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input id="signup-name" class="input-field" type="text" name="name" required placeholder="John Doe"
+                autocomplete="name">
+        </div>
+
+        <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input id="signup-email" class="input-field" type="email" name="email" required placeholder="name@email.com"
+                autocomplete="email">
+        </div>
+
+        <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input id="signup-password" class="input-field" type="password" name="password" required
+                placeholder="Minimum 6 characters" autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register &amp; Continue</button>
+    </form>
+
+    <p class="text-muted auth-switch-text">
+        Already a member? <a href="/login" class="link-gold">Login here</a>
+    </p>
+</div>
+{% endblock %}

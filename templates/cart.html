@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-card page-card--wide">
+    <h2 class="page-title page-title--left page-divider">Your Shopping Cart</h2>
+
+    {% if items %}
+    <table class="table-premium">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+                <th class="cart-action-col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td class="cart-item-name">{{ item.product.name }}</td>
+                <td class="text-gold">₹{{ item.product.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td class="text-gold cart-subtotal">₹{{ item.product.price * item.quantity }}</td>
+                <td class="cart-action-cell">
+                    <a href="{{ url_for('remove_from_cart', item_id=item.id) }}" class="btn-danger-sm">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <h3 class="cart-total-title">Total Amount: <span class="text-gold checkout-total-amount">₹{{ total_price
+                }}</span></h3>
+        <a href="{{ url_for('checkout') }}" class="btn btn-primary checkout-btn-inline">Proceed
+            to Checkout</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p class="text-muted empty-state-text">Your cart is currently empty.</p>
+        <a href="{{ url_for('shop') }}" class="btn btn-outline mt-1">Return to Shop</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

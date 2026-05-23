@@ -1,0 +1,13 @@
+====================================
+       OFFICIAL GUJARAT PERMIT ORDER 
+====================================
+Order ID: ORD-002
+Customer: Talaviya Dhru
+Payment Method: Cash on Delivery
+Status: Verified & Approved
+------------------------------------
+1x Budweiser Premium - ₹180.0
+1x Bira 91 Blonde - ₹160.0
+------------------------------------
+GRAND TOTAL: ₹340.0
+====================================
